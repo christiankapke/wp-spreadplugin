@@ -1279,15 +1279,19 @@ if (!class_exists('WP_Spreadplugin')) {
 
             // display preview image
             $output .= '<div class="image-wrapper">';
-            $output .= '<a href="' . add_query_arg('splproduct', $id, get_permalink()) . '" target="' . self::$shopOptions['shop_linktarget'] . '"><img src="';
-
-            if (self::$shopOptions['shop_lazyload'] == 0) {
-                $output .= $imgSrc;
-            } else {
-                $output .= plugins_url('/img/blank.gif', __FILE__);
+	    if ($shop_enablelink != 0) {
+	      $output .= '<a href="' . add_query_arg('splproduct', $id, get_permalink()) . '" target="' . self::$shopOptions['shop_linktarget'] . '">';
+	    }              
+	    $output .= '<img src="';
+	    if (self::$shopOptions['shop_lazyload'] == 0) {
+	      $output .= $imgSrc;
+	    } else {
+	      $output .= plugins_url('/img/blank.gif', __FILE__);
+	    }
+	    $output .= '" alt="' . (!empty($article['name']) ? htmlspecialchars($article['name'], ENT_QUOTES) : '') . '" id="previewimg_' . $id . '" data-zoom-image="//image.spreadshirt.' . self::$shopOptions['shop_source'] . '/image-server/v1/products/' . $article['productId'] . '/views/' . $article['view'] . ',width=600,height=600' . (!empty($backgroundColor) ? ',backgroundColor=' . $backgroundColor : '') . '" class="preview lazyimg" data-original="' . $imgSrc . '" />';
+            if ($shop_enablelink != 0) {
+              $output .= '</a>';
             }
-
-            $output .= '" alt="' . (!empty($article['name']) ? htmlspecialchars($article['name'], ENT_QUOTES) : '') . '" id="previewimg_' . $id . '" data-zoom-image="//image.spreadshirt.' . self::$shopOptions['shop_source'] . '/image-server/v1/products/' . $article['productId'] . '/views/' . $article['view'] . ',width=600,height=600' . (!empty($backgroundColor) ? ',backgroundColor=' . $backgroundColor : '') . '" class="preview lazyimg" data-original="' . $imgSrc . '" /></a>';
             $output .= '</div>';
 
             $output .= '<h3>' . (!empty($article['name']) ? htmlspecialchars($article['name'], ENT_QUOTES) : '') . '</h3>';
