@@ -1311,7 +1311,7 @@ if (!class_exists('WP_Spreadplugin')) {
             $output .= '<input type="hidden" value="' . $article['view'] . '" id="view" name="view" />';
             $output .= '<input type="hidden" value="' . $id . '" id="article" name="article" />';
 
-            $output .= '<div class="add-basket-wrapper clearfix"><input type="submit" name="submit" class="add-basket-button" value=""></div>';
+            $output .= '<div class="add-basket-wrapper clearfix"><input type="submit" name="submit" class="add-basket-button" value="' . __('Add to basket', $this->stringTextdomain) . '"></div>';
 
             // order buttons
             $output .= '<input type="hidden" value="1" id="quantity" name="quantity" />';
